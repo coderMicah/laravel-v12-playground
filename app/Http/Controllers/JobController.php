@@ -18,7 +18,7 @@ class JobController extends Controller
      */
     public function index()
     {
-        $jobs = Job::latest()->get()->groupBy('featured');
+        $jobs = Job::latest()->with(['employer','tags'])->get()->groupBy('featured');
         $featuredJobs = $jobs[1];
         $nonFeaturedJobs = $jobs[0];
         // $featuredJobs = $featuredJobs->sortByDesc('created_at')->take(3);
